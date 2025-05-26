@@ -38,8 +38,7 @@
 
 ## 🧩 Diagram Blok Sistem
 
-![Diagram Blok Sistem](Task%202/Diagram%20Blok%20Sistem/diagram-blok-sistem.png)
-
+![Diagram Blok Sistem](Task%202/Diagram%20Blok%20Sistem.png)
 
 ---
 
