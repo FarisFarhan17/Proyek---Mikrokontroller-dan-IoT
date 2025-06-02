@@ -1,12 +1,12 @@
-# 📌 Smart Door IoT Project — Kelompok 15
+# Smart Door IoT Project — Kelompok 15
 
-## 👥 Anggota
+## Anggota
 - **Ariel Yosua Hasibuan** — 105222004  
 - **Faris Farhan** — 105222013
 
 ---
 
-## 📘 Deskripsi
+## Deskripsi
 **Smart Door** adalah sistem keamanan pintu berbasis **ESP32-CAM** dan **Internet of Things (IoT)**. Sistem ini dirancang untuk:
 - Mengambil gambar pengunjung saat tombol ditekan.
 - Mengirim gambar ke smartphone pemilik rumah via internet (rencana menggunakan **Telegram API**).
@@ -14,7 +14,7 @@
 
 ---
 
-## 🎯 Tujuan Proyek
+## Tujuan Proyek
 1. Mendeteksi pengunjung dan menangkap gambar otomatis.
 2. Mengirimkan gambar ke pemilik rumah secara real-time.
 3. Memberikan kontrol jarak jauh untuk membuka pintu.
@@ -23,7 +23,7 @@
 
 ---
 
-## 🌍 SDGs Relevan: Nomor 11 — Kota dan Permukiman Berkelanjutan
+## SDGs Relevan: Nomor 11 — Kota dan Permukiman Berkelanjutan
 **Target:**
 - 11.1: Akses terhadap perumahan layak, aman, dan terjangkau.
 - 11.7: Akses universal ke ruang publik aman dan inklusif.
@@ -36,13 +36,13 @@
 
 ---
 
-## 🧩 Diagram Blok Sistem
+## Diagram Blok Sistem
 
 ![Diagram Blok Sistem](Task%202/Diagram%20Blok%20Sistem.png)
 
 ---
 
-## 🧰 Daftar Komponen
+## Daftar Komponen
 
 | No | Komponen             | Fungsi                                                                 |
 |----|----------------------|------------------------------------------------------------------------|
@@ -55,7 +55,7 @@
 
 ---
 
-## ⚙️ Alur Sistem (Flow)
+## Alur Sistem (Flow)
 1. Pengunjung menekan tombol.
 2. ESP32-CAM mengambil gambar.
 3. Gambar dikirim via Wi-Fi ke Telegram.
