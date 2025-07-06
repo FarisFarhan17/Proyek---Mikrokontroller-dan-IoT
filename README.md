@@ -7,58 +7,97 @@
 ---
 
 ## Deskripsi
-**Smart Door** adalah sistem keamanan pintu berbasis **ESP32-CAM** dan **Internet of Things (IoT)**. Sistem ini dirancang untuk:
-- Mengambil gambar pengunjung saat tombol ditekan.
-- Mengirim gambar ke smartphone pemilik rumah via internet (rencana menggunakan **Telegram API**).
-- Memberi kontrol akses jarak jauh untuk membuka pintu secara otomatis melalui **servo** atau **solenoid lock**.
+Sistem **Smart Lockbox** ini merupakan solusi keamanan rumah berbasis **ESP32**, dikembangkan menggunakan **MicroPython**, yang memungkinkan **penguncian/pembukaan pintu otomatis**, **notifikasi real-time via Telegram**, serta kontrol melalui **antarmuka web lokal**.
 
 ---
 
-## Tujuan Proyek
-1. Mendeteksi pengunjung dan menangkap gambar otomatis.
-2. Mengirimkan gambar ke pemilik rumah secara real-time.
-3. Memberikan kontrol jarak jauh untuk membuka pintu.
-4. Mengintegrasikan sistem buka pintu otomatis (servo/solenoid).
-5. Menyediakan solusi keamanan IoT yang terjangkau dan fleksibel.
+## 📦 Fitur Utama
+
+- Deteksi keberadaan tamu menggunakan **sensor ultrasonik HC-SR04**
+- Mekanisme **kunci otomatis** menggunakan **servo motor + solenoid**
+- Kontrol pintu dari jarak jauh via **Web UI** dan **Telegram Bot**
+- Indikator visual/audio dengan **LED & buzzer**
+- Logging aktivitas pintu disertai timestamp
+- **Berbasis MicroPython** dan dapat dijalankan langsung di ESP32
 
 ---
 
-## SDGs Relevan: Nomor 11 — Kota dan Permukiman Berkelanjutan
-**Target:**
-- 11.1: Akses terhadap perumahan layak, aman, dan terjangkau.
-- 11.7: Akses universal ke ruang publik aman dan inklusif.
-- 11.B: Penerapan teknologi inovatif di tingkat lokal.
+## 🧰 Komponen yang Digunakan
 
-**Kontribusi Proyek:**
-- Memberikan kontrol akses terhadap siapa yang boleh masuk rumah.
-- Mempromosikan teknologi keamanan berbasis IoT.
-- Menunjang keamanan perumahan dengan solusi efisien dan hemat energi.
-
----
-
-## Diagram Blok Sistem
-
-![Diagram Blok Sistem](Task%202/Diagram%20Blok%20Sistem.png)
+| No | Komponen           | Fungsi                                 |
+|----|--------------------|----------------------------------------|
+| 1  | ESP32              | Mikrokontroler utama                   |
+| 2  | HC-SR04            | Sensor ultrasonik (deteksi objek)     |
+| 3  | Servo SG90         | Menggerakkan mekanisme pintu          |
+| 4  | Solenoid 12V       | Aktuator pengunci pintu                |
+| 5  | Push Button        | Akses manual dari dalam rumah          |
+| 6  | LED Merah/Hijau    | Indikator status sistem                |
+| 7  | Buzzer             | Notifikasi audio                       |
+| 8  | Transistor TIP122  | Driver solenoid                        |
+| 9  | Diode 1N4007       | Proteksi back EMF                      |
+| 10 | Catu Daya 12V      | Sumber daya eksternal                  |
 
 ---
 
-## Daftar Komponen
+## ⚙️ Cara Kerja Sistem
 
-| No | Komponen             | Fungsi                                                                 |
-|----|----------------------|------------------------------------------------------------------------|
-| 1  | ESP32-CAM            | Mikrokontroler + kamera, kirim gambar via Wi-Fi                        |
-| 2  | Push Button          | Ditekan pengunjung untuk trigger kamera                                |
-| 3  | Solenoid Lock/Servo  | Membuka/tutup pintu secara otomatis                                    |
-| 4  | Resistor             | Menstabilkan sinyal input dari button                                  |
-| 5  | Kabel Jumper         | Menghubungkan komponen elektronik                                      |
-| 6  | Breadboard           | Tempat merakit rangkaian prototipe                                     |
+1. Saat tamu berdiri di depan pintu, sensor HC-SR04 mendeteksi keberadaan selama 3 detik.
+2. Sistem mengirim notifikasi ke Telegram beserta tautan Web UI.
+3. Pemilik rumah membuka Web UI dan menekan tombol “🔓 Buka Kunci”.
+4. Sistem membuka pintu dengan solenoid & servo, lalu menunggu tombol ditekan dari dalam untuk menutup kembali secara otomatis.
 
 ---
 
-## Alur Sistem (Flow)
-1. Pengunjung menekan tombol.
-2. ESP32-CAM mengambil gambar.
-3. Gambar dikirim via Wi-Fi ke Telegram.
-4. Pemilik rumah menerima gambar.
-5. Pemilik dapat memilih untuk membuka pintu.
-6. Servo atau solenoid akan membuka pintu secara otomatis.
+## 🌐 Web Interface
+
+Dapat diakses melalui IP lokal (contoh: `http://192.168.1.100/`), berisi:
+
+- Status sistem (TERKUNCI/TERBUKA)
+- Sensor jarak real-time
+- Tombol kontrol manual (Buka/Kunci)
+- Log aktivitas terakhir
+
+---
+
+## 💬 Telegram Bot
+
+Gunakan Telegram bot untuk menerima:
+
+- Notifikasi tamu terdeteksi
+- Log orang keluar
+- Tautan akses cepat ke Web UI
+
+> Buat bot baru di [@BotFather](https://t.me/BotFather), lalu masukkan `BOT_TOKEN` dan `CHAT_ID` Anda ke `main.py`.
+
+---
+
+## 📁 Struktur File
+main.py: "File utama logika ESP32"
+hcsr04.py: "Library HC-SR04"
+servo.py: "Library servo motor"
+README.md: "Dokumentasi proyek"
+
+
+
+## Diagram Perangkat Keras
+
+![Diagram Blok Sistem](Task%202%20&%203/Diagram.png)
+
+---
+
+---
+
+## 🚫 Catatan
+
+- **ESP32-CAM tidak digunakan** dalam proyek ini karena tidak mendukung penuh MicroPython.
+- Pastikan koneksi Wi-Fi stabil agar Web UI dan notifikasi Telegram bekerja maksimal.
+- Jalankan kode menggunakan firmware MicroPython versi terbaru untuk ESP32.
+
+---
+
+## 📽️ Demo
+
+Tonton video demonstrasi sistem:  
+[▶️ Video Demo Smart Lockbox](https://drive.google.com/file/d/1It_olBMoI0XDhckOkO42Efe23fB0Skgu/view?usp=sharing)
+
+---
